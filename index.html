@@ -4,31 +4,16 @@
 <title>ACE in Action</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"> 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="style.css">
 <style type="text/css" media="screen">
     #editor { 
         top: 0;
         right: 0;
         bottom: 0;
         left: 0;
-        width: 50vw;
-        height: 90vh;
-        font-size:small;
-        margin: 1rem 0;
-    }
-    label{
-        font-size: x-small;
-        margin:0 10px;
-        font-weight: 10;
-    }
-    #theme,#lang,#fsize{
-        height: 2rem;
-        font-size: x-small;
+        width: 68;
+        height: 68vh;
+        font-size: medium;
     }
 </style>
 
@@ -37,37 +22,39 @@
 
 </head>
 <body>
-    <label>Theme</label>
+    <div id="text">
+    <label id="theme_text">Theme:</label>
     <select id="theme">
         <option value="0" selected>Dawn</option>
         <option value="1">Monokai</option>
         <option value="2">Twilight</option>
     </select>
-    <label>Language</label>
+    <label id="lang_text">Language</label>
     <select id="lang">
-        <option value="2" selected>C/Cpp</option>
+        <option value="2" selected>C/C++</option>
         <option value="0">Python</option>
         <option value="3">Java</option>
-        <option value="1">javascript</option>
+        <option value="1">JavaScript</option>
     </select>
-        <label>Font Size</label>
+        <label id="fsize_text">Font Size:</label>
         <select id="fsize">
             <option value="0">xx-small</option>
             <option value="1">x-small</option>
-            <option value="2" selected>Small</option>
-            <option value="4">Medium</option>
+            <option value="2">Small</option>
+            <option value="4" selected>Medium</option>
             <option value="5">large</option>
             <option value="7">x-large</option>
             <option value="8">xx-large</option>
         </select>
+    </div>
     <div>
         <div  id="editor"></div>
     </div>    
 
-    <button type="button" id="btn" class="btn btn-outline-success">Run Code</button>
-    <button type="button" id="btn" class="btn btn-outline-primary">Save Code</button>
-    <button type="button" id="btn" class="btn btn-outline-warning">Pause Code</button>
-
+    <button type="button" id="btn_run" class="btn btn-outline-success">Run Code</button>
+    <button type="button" id="btn_save" class="btn btn-outline-primary">Save Code</button>
+    <button type="button" id="btn_pause" class="btn btn-outline-warning">Pause Test</button>
+    <div id="output"></div>
 
 
 
@@ -78,12 +65,12 @@
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/dawn");
     editor.session.setMode("ace/mode/c_cpp");
-
+    editor.session.setValue("//Your Code goes here...");
     executebtn.addEventListener('click',()=>{
         const userCode=editor.getValue();
-
         try{
             Function(userCode)();
+            //alert(p);
         } catch(err){
             console.error(err);
         }
@@ -120,18 +107,22 @@
         if(l==0)
         {
             editor.session.setMode("ace/mode/python"); 
+            editor.session.setValue("#Write Your Code here...");
         }
         else if(l==1)
         {
             editor.session.setMode("ace/mode/javascript");
+            editor.session.setValue("//Write Your Code here...");
         }
         else if(l==2)
         {
             editor.session.setMode("ace/mode/c_cpp");
+            editor.session.setValue("//Write Your Code here...");
         }
         else if(l==3)
         {
             editor.session.setMode("ace/mode/java");
+            editor.session.setValue("//Write Your Code here...");
         }
     }
 </script>
